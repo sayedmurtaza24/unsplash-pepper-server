@@ -1,10 +1,12 @@
 const express = require('express');
 require('dotenv').config()
+const cors = require("cors");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 function getData(searchTerm, callback) {
    fetch(`https://api.unsplash.com/search/photos?page=1&query=${searchTerm}&client_id=${process.env.ACCESS_KEY}`)
